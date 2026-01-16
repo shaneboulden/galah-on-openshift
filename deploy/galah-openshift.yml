@@ -20,9 +20,9 @@ spec:
       - name: galah
         image: quay.io/smileyfritz/galah-openshift:v0.1.0
         args:
-          - "-f"               
+          - "-f"
           - "/tmp/cache.db"
-          - "-o"   
+          - "-o"
           - "/tmp/event_log.json"
         env:
         - name: SSL_CERT_FILE
@@ -49,18 +49,17 @@ spec:
         - containerPort: 8888
         volumeMounts:
           - name: galah-config-volume
-            mountPath: /config/config.yaml   # <- relative to workingDir
+            mountPath: /config/config.yaml
             subPath: config.yaml
           - name: galah-trusted-ca
             mountPath: /etc/pki/tls/certs/ca-bundle.crt
-            subPath: ca-bundle.crt     
+            subPath: ca-bundle.crt
       volumes:
       - name: galah-config-volume
         configMap:
           name: galah-config
           items:
-          - key: config-mimic-ocp-4.12.yaml
-          # - key: config-openshift.yaml
+          - key: config-openshift.yaml
             path: config.yaml
       - name: galah-trusted-ca
         configMap:
